@@ -861,6 +861,8 @@
         window.addEventListener('load', () => {
             document.body.classList.add('loaded');
             setInterval(runPresentationLoop, 13000);
+            // 👉 phát nhạc sau 3 giây
+            setTimeout(playAudio, 3000);
 
             const fx = document.getElementById('fx-layer');
             function createPetal() {
