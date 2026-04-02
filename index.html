@@ -897,14 +897,21 @@ function playAudio() {
     const audio = document.getElementById("bg-music");
     if (!audio) return;
 
-    audio.muted = false;   // đảm bảo có tiếng
+    audio.muted = false;
     audio.play().catch(() => {
         console.log("Autoplay bị chặn");
     });
 }
 
-// Click bất kỳ đâu để phát nhạc (1 lần duy nhất)
-document.addEventListener("click", playAudio, { once: true });
+// auto sau 3s
+window.addEventListener('load', () => {
+    setTimeout(playAudio, 3000);
+});
+
+// click fallback
+["click", "touchstart"].forEach(evt => {
+    document.addEventListener(evt, playAudio, { once: true });
+});
         
 </script>
     
