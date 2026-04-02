@@ -885,6 +885,17 @@
                 fx.appendChild(sparkle);
             }
         });
+        const music = document.getElementById("bg-music");
+
+// Bật âm thanh khi user chạm / click lần đầu
+        
+function enableSound() {
+    music.muted = false;
+    music.play().catch(() => {});
+    document.removeEventListener("click", enableSound);
+}
+
+document.addEventListener("click", enableSound);
     </script>
     
     <audio id="bg-music" autoplay loop muted>
