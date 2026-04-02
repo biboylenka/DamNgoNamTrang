@@ -784,7 +784,7 @@
 
 <body>
     
-    <audio id="bg-music" autoplay loop muted>
+<audio id="bg-music" loop>
     <source src="music.mp3" type="audio/mpeg">
 </audio>
     
@@ -895,12 +895,13 @@ function playAudio() {
     const audio = document.getElementById("bg-music");
     if (!audio) return;
 
+    audio.muted = false;   // đảm bảo có tiếng
     audio.play().catch(() => {
         console.log("Autoplay bị chặn");
     });
 }
 
-// Click để phát (quan trọng nhất)
+// Click bất kỳ đâu để phát nhạc (1 lần duy nhất)
 document.addEventListener("click", playAudio, { once: true });
         
 </script>
