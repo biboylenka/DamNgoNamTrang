@@ -885,18 +885,26 @@
                 fx.appendChild(sparkle);
             }
         });
-        const music = document.getElementById("bg-music");
-
-// Bật âm thanh khi user chạm / click lần đầu
         
-function enableSound() {
-    music.muted = false;
-    music.play().catch(() => {});
-    document.removeEventListener("click", enableSound);
-}
+        
+<script>
+        // Hàm cố gắng chạy nhạc
+        function playAudio() {
+            var audio = document.getElementById("bgMusic");
+            audio.play().catch(function(error) {
+                console.log("Trình duyệt chặn tự động phát, chờ tương tác người dùng...");
+            });
+        }
 
-document.addEventListener("click", enableSound);
-    </script>
+        // Chạy ngay khi load (có thể thất bại trên Chrome/Safari)
+        window.addEventListener('load', playAudio);
+
+        // Kích hoạt khi người dùng click vào trang
+        document.addEventListener('click', function() {
+            playAudio();
+        }, { once: true }); // Chỉ chạy một lần duy nhất khi click
+        
+</script>
     
     <audio id="bg-music" autoplay loop muted>
     <source src="music.mp3" type="audio/mpeg">
