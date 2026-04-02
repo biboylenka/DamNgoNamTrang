@@ -782,11 +782,12 @@
     </style>
 </head>
 
+<body>
+    
     <audio id="bg-music" autoplay loop muted>
     <source src="music.mp3" type="audio/mpeg">
 </audio>
-<body>
-
+    
     <div class="main-card">
 
         <div class="frame-inner-overlay"></div>
@@ -890,21 +891,17 @@
         });
         
         
-        // Hàm cố gắng chạy nhạc
-        function playAudio() {
-            var audio = document.getElementById("bg-music");
-            audio.play().catch(function(error) {
-                console.log("Trình duyệt chặn tự động phát, chờ tương tác người dùng...");
-            });
-        }
+function playAudio() {
+    const audio = document.getElementById("bg-music");
+    if (!audio) return;
 
-        // Chạy ngay khi load (có thể thất bại trên Chrome/Safari)
-        window.addEventListener('load', playAudio);
+    audio.play().catch(() => {
+        console.log("Autoplay bị chặn");
+    });
+}
 
-        // Kích hoạt khi người dùng click vào trang
-        document.addEventListener('click', function() {
-            playAudio();
-        }, { once: true }); // Chỉ chạy một lần duy nhất khi click
+// Click để phát (quan trọng nhất)
+document.addEventListener("click", playAudio, { once: true });
         
 </script>
     
